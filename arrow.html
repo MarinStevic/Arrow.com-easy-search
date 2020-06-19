@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arrow</title>
+</head>
+<body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+	$(function () {
+		$("#type").change(function () {
+			if ($(this).val() == "1") {
+				$("#divCapacitor").show();
+				$("#divResistor").hide();
+			} else if ($(this).val() == "2"){
+				$("#divCapacitor").hide();
+				$("#divResistor").show();
+			} else {
+				$("#divCapacitor").hide();
+				$("#divResistor").hide();
+			}
+		});
+	});
+	
+	function myFunc() {
+		var type = document.getElementById("type");
+		if (type.options[type.selectedIndex].value == 1) {
+			var link = "https://www.arrow.com/en/products/search?cat=Capacitors&promoGroupLevel=main&filters=";
+			if (document.getElementById("capVoltageCheck").checked == true) {
+				link += "Voltage:";
+				link += document.getElementById("voltage").value;
+				link += "VDC;";
+			}
+			if (document.getElementById("capTolernaceCheck").checked == true) {
+				link += "Tolerance:";
+				link += document.getElementById("toleranceCap").value;
+				link += "%25;";
+			}
+			if (document.getElementById("capPackageCheck").checked == true) {
+				link += "Package/Case:";
+				link += document.getElementById("packageCap").value;
+				link += ";";
+			}
+			if (document.getElementById("capCapacitanceCheck").checked == true) {
+				link += "Capacitance+Value:";
+				link += document.getElementById("capacitance").value;
+				var c = document.getElementById("capacitanceValue");
+				link += c.options[c.selectedIndex].text;
+				link += ";";
+			}
+			if (document.getElementById("stockCap").checked == true)
+				link += "In+Stock:Yes;";
+			if (document.getElementById("priceCap").checked == true)
+				link += "&sortBy=calculatedPrice&sortDirection=asc";
+			document.getElementById("link").href = link;
+		}
+		else if (type.options[type.selectedIndex].value == 2) {
+			var link = "https://www.arrow.com/en/products/search?cat=Resistors&promoGroupLevel=main&filters=";
+			if (document.getElementById("resistanceCheck").checked == true) {
+				link += "Resistance+Value:";
+				link += document.getElementById("resistance").value;
+				var r = document.getElementById("resistanceValue");
+				link += r.options[r.selectedIndex].text;
+				link += ";";
+			}
+			if (document.getElementById("resToleranceCheck").checked == true) {
+				link += "Tolerance:";
+				link += document.getElementById("toleranceRes").value;
+				link += "%25;";
+			}
+			if (document.getElementById("powerCheck").checked == true) {
+				link += "Power+Rating:";
+				var p = document.getElementById("power");
+				link += p.options[p.selectedIndex].text;
+				link += ";";
+			}
+			if (document.getElementById("resPackageCheck").checked == true) {
+				link += "Package/Case:";
+				link += document.getElementById("packageRes").value;
+				link += ";";
+			}
+			if (document.getElementById("stockRes").checked == true)
+				link += "In+Stock:Yes;";
+			if (document.getElementById("priceRes").checked == true)
+				link += "&sortBy=calculatedPrice&sortDirection=asc";
+			document.getElementById("link").href = link;
+		}
+	}
+</script>
+<p>
+	<select id="type">
+		<option selected = "selected" >Select type</option>
+		<option value="1">Capacitor</option>
+		<option value="2">Resistor</option>
+	</select>
+</p>
+
+<div id="divCapacitor" style="display: none">
+	<table>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="capVoltageCheck"></td>
+				<td>Voltage:</td>
+				<td><input type="text" id="voltage">VDC</td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="capTolernaceCheck"></td>
+				<td>Tolerance:</td>
+				<td><input type="text" id="toleranceCap">%</td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="capPackageCheck"></td>
+				<td>Package:</td>
+				<td><input type="text" id="packageCap"></td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="capCapacitanceCheck"></td>
+				<td>Capacitance:</td>
+				<td><input type="text" id="capacitance">
+				<select id="capacitanceValue">
+					<option value="1">pF</option>
+					<option value="2">uF</option>
+					<option value="3">F</option>
+				</select></td>
+			</p>
+		</tr>
+		<tr><td></td><td><p>Sort by price:</td><td><input id="priceCap" type="checkbox"></td></p></tr>
+		<tr><td></td><td><p>In stock:</td><td><input id="stockCap" type="checkbox"></td></p></tr>
+	</table>
+</div>
+
+<div id="divResistor" style="display: none">
+	<table>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="powerCheck"></td>
+				<td>Power:</td>
+				<td><select id="power">
+					<option>0.063 (1/16)</option>
+					<option>0.1 (1/10)</option>
+					<option>0.2 (1/5)</option>
+					<option>0.33 (1/3)</option>
+					<option>0.5 (1/2)</option>
+					<option>1</option>
+				</select>W</td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="resToleranceCheck"></td>
+				<td>Tolerance:</td>
+				<td><input type="text" id="toleranceRes">%</td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="resPackageCheck"></td>
+				<td>Package:</td>
+				<td><input type="text" id="packageRes"></td>
+			</p>
+		</tr>
+		<tr>
+			<p>
+				<td><input type="checkbox" id="resistanceCheck"></td>
+				<td>Resistance:</td>
+				<td><input type="text" id="resistance">
+				<select id="resistanceValue">
+					<option value="1">m</option>
+					<option value="2"></option>
+					<option value="3">K</option>
+					<option value="4">M</option>
+				</select></td>
+			</p>
+		</tr>
+		<tr><td></td><td><p>Sort by price:</td><td><input id="priceRes" type="checkbox"></td></p></tr>
+		<tr><td></td><td><p>In stock:</td><td><input id="stockRes" type="checkbox"></td></p></tr>
+	</table>
+</div>
+<br>
+<input type="button" id="linkBtn" value="Show link" onclick="myFunc()">
+<p><a id="link" target="_blank" rel="noopener noreferrer">Link</a></p>
+</body>
+</html>
